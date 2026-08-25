@@ -9,7 +9,7 @@ DOWNLOAD_DIR = "downloads"
 OUTPUT_JSON = "reel_data.json"
 
 URLS = [
-    "https://www.instagram.com/reels/DcAS-mxxUeT/"
+    "REELS_URL"
 ]
 
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
