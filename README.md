@@ -1,15 +1,18 @@
 # Universal Downloader
 
-An automated Python pipeline for downloading Instagram Reels using `yt-dlp`, standardizing videos to 9:16 (1080x1920) with `FFmpeg`, and storing video metadata in a JSON log.
+An automated Python downloader using `yt-dlp` and `FFmpeg` for downloading high-quality videos from YouTube, Instagram, and TikTok.
+
+Normal YouTube videos keep their original resolution, while Shorts, Reels, and TikTok videos are formatted to 1080x1920 for vertical content.
 
 ## Features
 
-* **High-Quality Video Extraction**: Uses `yt-dlp` with optional Instagram cookie session support.
-* **Video Processing**: Applies minor timeline and visual adjustments during processing.
-* **Failsafe Mechanism**: Saves the original downloaded video if FFmpeg processing fails.
-* **Metadata Tracking**: Stores the platform, username, caption, video path, video URL, and Reel URL in `reel_data.json`.
-* **Duplicate Detection**: Automatically skips URLs that have already been processed.
-* **Clean Filenames**: Generates Windows-friendly filenames from video captions.
+* **Multi-Platform:** Supports YouTube, Instagram, and TikTok.
+* **High-Quality Downloads:** Downloads the best available video and audio quality.
+* **Smart Formatting:** Keeps normal YouTube videos unchanged and formats vertical content to 1080x1920.
+* **Failsafe:** Keeps the original download if FFmpeg processing fails.
+* **Metadata Tracking:** Saves download information to `reel_data.json`.
+* **Duplicate Detection:** Skips URLs that have already been downloaded.
+* **Clean Filenames:** Creates Windows-friendly filenames.
 
 ## Prerequisites
 
@@ -37,22 +40,7 @@ brew install ffmpeg
 sudo apt install ffmpeg
 ```
 
-Verify FFmpeg:
-
-```bash
-ffmpeg -version
-```
-
-## Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/rohanncodess/download-all.git
-cd download-all
-```
-
-Install the Python dependency:
+Install `yt-dlp`:
 
 ```bash
 pip install yt-dlp
@@ -60,31 +48,31 @@ pip install yt-dlp
 
 ## Usage
 
-Add your Reel URLs to `main.py`:
+Add URLs to `main.py`:
 
 ```python
 URLS = [
-    "YOUR_REEL_URL"
+    "YOUR_VIDEO_URL",
+    "YOUR_REEL_URL",
+    "YOUR_SHORT_URL"
 ]
 ```
 
-Then run:
+Run:
 
 ```bash
 python main.py
 ```
 
-If authentication is required, place your Instagram cookies file in the project directory:
+For Instagram authentication, place your cookies file in the project directory:
 
 ```text
 insta_cookies.txt
 ```
 
-The script automatically detects and uses it when available.
-
 ## Output
 
-Processed videos are saved inside:
+Downloaded media is saved in:
 
 ```text
 downloads/
@@ -94,19 +82,6 @@ Metadata is stored in:
 
 ```text
 reel_data.json
-```
-
-Example metadata:
-
-```json
-{
-    "platform": "Instagram",
-    "username": "username",
-    "caption": "Example caption",
-    "video_file": "downloads/example.mp4",
-    "video_url": "https://www.instagram.com/reel/...",
-    "reel_url": "https://www.instagram.com/reel/..."
-}
 ```
 
 ## Project Structure
@@ -122,6 +97,6 @@ download-all/
 
 ## Notes
 
-The video processing step makes formatting and encoding changes to downloaded media. It should not be used to evade platform moderation, copyright enforcement, or content-ownership systems.
+Normal YouTube videos are kept at their downloaded resolution. YouTube Shorts, Instagram Reels, and TikTok videos are converted to 1080x1920.
 
-Only download and process content you have permission to use, and follow the terms of service of the platform and the rights of content creators.
+Only download and process content you have permission to use, and follow the terms of service and copyright rules of the platforms involved.
